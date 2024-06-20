@@ -13,6 +13,82 @@ crossorigin="anonymous"></script>
 <script async custom-element="amp-auto-ads"
 src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
 </script>
+  <script type="text/javascript" src="https://lagged.com/api/rev-share/lagged.js"></script>
+  <script type="text/javascript">
+LaggedAPI.init('lagdev_7194', 'ca-pub- 1060695164961482');
+Interstitial Ads
+
+//
+//pause game / music before calling:
+//
+LaggedAPI.APIAds.show(function() {
+
+  //
+  // ad is finished, unpause game/music
+  //
+
+console.log("ad completed");
+
+});
+
+//step 1: call this to check if reward ad available
+LaggedAPI.GEvents.reward(canShowReward,rewardSuccess);
+
+//this will be called if a reward ad can be shown or not
+  var canShowReward=function(success,showAdFn){
+    if(success){
+
+      //you can show user a button for a reward, must call showAdFn() on click
+      //ex: rewardButton.onclick=function(){showAdFn();}
+
+    }else{
+      //no ad to show, do nothing
+    }
+  }
+
+//after ad is played (after showAdFn() is called)
+  var rewardSuccess=function(success){
+    if(success){
+      //give user the reward
+    }else{
+      //no reward
+    }
+
+    //remove reward button
+    //ex: rewardButton.remove();
+  }
+
+var api_awards=[];
+api_awards.push(AWARD_ID);
+//can push more than one award at a time
+LaggedAPI.Achievements.save(api_awards, function(response) {
+if(response.success) {
+console.log('achievement saved')
+}else {
+console.log(response.errormsg);
+}
+});
+
+var boardinfo={};
+boardinfo.score=SCORE_VAR;
+boardinfo.board=HS_BOARD_ID;
+LaggedAPI.Scores.save(boardinfo, function(response) {
+if(response.success) {
+console.log('high score saved')
+}else {
+console.log(response.errormsg);
+}
+});
+
+LaggedAPI.User.get(function(userData) {
+console.log(userData);
+console.log(userData.user.id);
+console.log(userData.user.name);
+console.log(userData.user.avatar);
+});
+
+
+</script>
 <link rel=”canonical” href=”https://firepads.github.io"/>
 <meta name="google-adsense-account" content="ca-pub-1060695164961482">	
 
